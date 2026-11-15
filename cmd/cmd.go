@@ -12,8 +12,6 @@ import (
 	"path/filepath"
 )
 
-var version, build string
-
 func main() {
 
 	app := cli.NewApp()
@@ -23,9 +21,7 @@ func main() {
 	app.Author = "Eugene Terentev"
 	app.Email = "eugene@terentev.net"
 
-	if version != "" && build != "" {
-		app.Version = fmt.Sprintf("%s (build %s)", version, build)
-	}
+	app.Version = versionString()
 
 	usr, _ := user.Current()
 	homeDir := usr.HomeDir
