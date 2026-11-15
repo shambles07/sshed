@@ -15,17 +15,36 @@ type Host struct {
 
 	Options map[string]string
 
+	// Params holds every key/value line of the host block in file order,
+	// including repeated keys (e.g. LocalForward) and inline comments.
+	Params []Param
+	// Comment is the comment on the "Host" line itself, if any.
+	Comment string
+
 	creds *keychain.Record
+}
+
+// Param is a single "Key Value # comment" line of a host block.
+type Param struct {
+	Key     string
+	Value   string
+	Comment string
 }
 
 func CreateFromConfig(h *ssh_config.Host) *Host {
 	hh := &Host{
 		Options: make(map[string]string),
+		Comment: strings.TrimSpace(h.EOLComment),
 	}
 	for _, node := range h.Nodes {
 		switch node.(type) {
 		case *ssh_config.KV:
 			c := node.(*ssh_config.KV)
+			hh.Params = append(hh.Params, Param{
+				Key:     c.Key,
+				Value:   strings.TrimSpace(c.Value),
+				Comment: strings.TrimSpace(c.Comment),
+			})
 			switch strings.ToLower(c.Key) {
 			case "hostname":
 				hh.Hostname = c.Value
