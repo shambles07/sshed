@@ -44,7 +44,9 @@ changelog:
   skip: true
 
 brews:
-  - tap:
+  # The tap lives in trntv's account; GITHUB_TOKEN can't push there.
+  - skip_upload: true
+    tap:
       owner: trntv
       name: homebrew-sshed
     commit_author:
@@ -56,6 +58,8 @@ brews:
         bash_completion.install "completions/autocomplete.sh"
       
 scoop:
+  # The bucket lives in trntv's account; GITHUB_TOKEN can't push there.
+  skip_upload: true
   bucket:
     owner: trntv
     name: scoop-sshed
