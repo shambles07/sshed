@@ -12,12 +12,15 @@ builds:
     - 386
     - amd64
     - arm
+    - arm64
   goarm:
     - 6
     - 7
   ignore:
     - goos: darwin
       goarch: 386
+    - goos: windows
+      goarch: arm
   gcflags:
     - all=-trimpath={{.Env.GOPATH}}
 
@@ -46,7 +49,7 @@ changelog:
 brews:
   # The tap lives in trntv's account; GITHUB_TOKEN can't push there.
   - skip_upload: true
-    tap:
+    repository:
       owner: trntv
       name: homebrew-sshed
     commit_author:
@@ -57,16 +60,16 @@ brews:
         bin.install "sshed"
         bash_completion.install "completions/autocomplete.sh"
       
-scoop:
+scoops:
   # The bucket lives in trntv's account; GITHUB_TOKEN can't push there.
-  skip_upload: true
-  bucket:
-    owner: trntv
-    name: scoop-sshed
-  commit_author:
-    name: Yevhen Terentiev
-    email: yevhen.terentiev@gmail.com
-  homepage: https://github.com/trntv/sshed
+  - skip_upload: true
+    repository:
+      owner: trntv
+      name: scoop-sshed
+    commit_author:
+      name: Yevhen Terentiev
+      email: yevhen.terentiev@gmail.com
+    homepage: https://github.com/trntv/sshed
 
 nfpms:
   -

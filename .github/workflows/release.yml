@@ -22,10 +22,10 @@ jobs:
           go-version: stable
 
       - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v2
+        uses: goreleaser/goreleaser-action@v6
         with:
-          version: v0.157.0
-          args: release --rm-dist
+          version: v1.26.2
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GOPATH: /home/runner/go

@@ -14,6 +14,8 @@ and the project uses [Semantic Versioning](https://semver.org/).
   single label, one value per line.
 - Inline comments on parameter lines and on the `Host` line are shown.
 
+- Release builds for `arm64` (Apple Silicon macOS, Linux and Windows).
+
 ### Fixed
 - `sshed --version` / `-v` now works. The version is taken from goreleaser's
   default ldflags (`main.version`, `main.commit`, `main.date`), falling back to
